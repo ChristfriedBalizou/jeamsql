@@ -66,7 +66,7 @@ if __name__ == "__main__":
         print "Option database (-d|--database) not setted."
         sys.exit(1)
 
-    db = Database(options.database, config_path=options.config)
+    db = Database(section=options.database, config_path=options.config)
 
     if options.query:
         if not options.persist:
