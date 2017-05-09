@@ -175,12 +175,13 @@ class Adapter(object):
         return tabulate(reader, headers, tablefmt="orgtbl")
 
 
-    def __to_dict__(self, inflie):
+    def __to_dict__(self, infile):
+        docs = []
         for row in csv.DictReader(infile, delimiter='\t'):
             doc = {key: value for key, value in row.items()}
             docs.append(doc)
 
-        return json.dumps(docs, indent=4)
+        return docs
 
 
 class SQLError(Exception):
