@@ -7,7 +7,7 @@ class Sybase(Adapter):
 
     def __init__(self, *args, **kwargs):
 
-        connection_cmd = "tsql -S%s:%s -U%s -P%s -o fq" % (
+        connection_cmd = "tsql -H%s -p%s -U%s -P%s -o fq" % (
                 kwargs.get('server'),
                 kwargs.get('port'),
                 kwargs.get('user'),
