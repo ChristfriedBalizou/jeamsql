@@ -74,7 +74,7 @@ class Adapter(object):
         raise NotImplementedError
 
 
-    def select(self, query=None):
+    def select(self, query=None, fmt=None):
         '''
         Runs command and "always" return dictionary array
         '''
@@ -92,7 +92,7 @@ class Adapter(object):
         self.__connection__ = None
 
 
-    def tables(self, name=None):
+    def tables(self, name=None, fmt=None):
         '''
         List all tables. If name is given return the
         requested or None
@@ -101,7 +101,7 @@ class Adapter(object):
         self.connect(test=False)
 
 
-    def description(self, table_name=None):
+    def description(self, table_name=None, fmt=None):
         '''
         List all table with descriptions
         (table => fields => column : type)
@@ -119,14 +119,15 @@ class Adapter(object):
 
         try:
             for cmd in self.cmd:
-                subprocess.call([cmd])
-                return True
+                with open(os.devnull, 'w') as devnull:
+                    subprocess.call([cmd], stderr=devnull)
+                    return True
         except OSError as e:
             if e.errno == os.errno.ENOENT:
                 return False
         return True
 
-    def __runsql__(self, sql):
+    def __runsql__(self, sql, fmt=None):
 
          out, err = self.__connection__.communicate(
                  input=b'%s\nGO' % sql
@@ -136,7 +137,7 @@ class Adapter(object):
          if self.has_error(output):
              raise SQLError(output)
 
-         return self.to_response(output)
+         return self.to_response(output, fmt=fmt)
 
 
     def has_error(self, output):
@@ -150,16 +151,22 @@ class Adapter(object):
         return False
 
 
-    def to_response(self, output):
+    def to_response(self, output, fmt=None):
         '''
         Marshall csv to dictionary
         '''
         docs = []
-
         with io.StringIO(output) as infile:
-            if self.fmt is "json":
+            if fmt == "json":
                 return self.__to_dict__(infile)
-            return self.__to_table__(infile)
+
+            if fmt == "sql":
+                return self.__to_table__(infile)
+
+            if fmt is None:
+                if self.fmt is "json":
+                    return self.__to_dict__(infile)
+                return self.__to_table__(infile)
 
 
     def __to_table__(self, infile):

@@ -32,20 +32,20 @@ class Database(object):
         self.db.close()
 
 
-    def select(self, query):
-        return self.db.select(query)
+    def select(self, query, fmt=None):
+        return self.db.select(query, fmt=fmt)
 
 
     def execute(self, query):
         self.db.execute(query)
 
 
-    def tables(self, name=None):
-        return self.db.tables(name=name)
+    def tables(self, name=None, fmt=None):
+        return self.db.tables(name=name, fmt=fmt)
 
 
-    def description(self, table_name=None):
-        return self.db.description(table_name=table_name)
+    def description(self, table_name=None, fmt=None):
+        return self.db.description(table_name=table_name, fmt=fmt)
 
 
     def load_config(self, database, path=None):

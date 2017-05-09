@@ -52,6 +52,11 @@ if __name__ == "__main__":
                 "to use with -d and --list-tables options")
             )
 
+    parser.add_argument('--formate',
+            help="Output format",
+            default=None
+            )
+
     options = parser.parse_args()
 
     if len(sys.argv) == 1:
@@ -70,12 +75,21 @@ if __name__ == "__main__":
 
     if options.query:
         if not options.persist:
-            print db.select(query=options.query)
+            print db.select(
+                    query=options.query,
+                    fmt=options.formate
+                    )
         else:
             db.execute(query=options.query)
 
     if options.list_tables:
-        print db.tables(name=options.name)
+        print db.tables(
+                name=options.name,
+                fmt=options.formate
+                )
 
     if options.desc:
-        print db.description(table_name=options.name)
+        print db.description(
+                table_name=options.name,
+                fmt=options.formate
+                )

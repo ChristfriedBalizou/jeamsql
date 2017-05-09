@@ -28,15 +28,15 @@ class Sybase(Adapter):
         )
 
 
-    def select(self, query=None):
+    def select(self, query=None, fmt=None):
 
-        super(Sybase, self).select(query=query)
+        super(Sybase, self).select(query=query, fmt=fmt)
 
         # TODO use sqlparse
         if not query:
             raise SyntaxError("Wrong query %s " % query)
 
-        return self.__runsql__(query)
+        return self.__runsql__(query, fmt=fmt)
 
 
     def execut(self, query):
@@ -50,13 +50,13 @@ class Sybase(Adapter):
         self.__runsql__(query)
 
 
-    def tables(self, name):
+    def tables(self, name, fmt=None):
 
-        super(Sybase, self).tables(name=name)
+        super(Sybase, self).tables(name=name, fmt=None)
 
         req = "sp_tables @table_type=\"'TABLE'\""
 
         if name:
             req = req + (", @table_name='%s'" % name)
 
-        return self.__runsql__(req)
+        return self.__runsql__(req, fmt=fmt)
