@@ -109,7 +109,7 @@ class Adapter(object):
         will be listed
         '''
 
-        raise NotImplementedError
+        self.connect(test=False)
 
 
     def __program_exist__(self):

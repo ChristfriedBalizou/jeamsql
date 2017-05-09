@@ -60,3 +60,22 @@ class Sybase(Adapter):
             req = req + (", @table_name='%s'" % name)
 
         return self.__runsql__(req, fmt=fmt)
+
+
+    def description(self, table_name=None, fmt=None):
+
+        super(Sybase, self).description(
+                table_name=table_name,
+                fmt=fmt
+                )
+
+        tables = self.tables(name=table_name, fmt="json")
+        docs = []
+
+        for t in tables:
+            self.connect(test=False)
+            req = "sp_columns @table_name='%s'" % t['table_name']
+            doc = self.__runsql__(req, fmt=fmt)
+            docs.append(doc)
+
+        return docs
