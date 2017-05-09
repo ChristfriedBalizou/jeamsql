@@ -1,6 +1,26 @@
 from adapter import Adapter
+from multiprocessing import Pool
 
 import re
+
+
+'''
+cPickle.PicklingError: Can't pickle <type 'instancemethod'>:
+attribute lookup __builtin__.instancemethod failed
+
+http://stackoverflow.com/a/25161919
+'''
+import copy_reg
+import types
+
+def _pickle_method(m):
+    if m.im_self is None:
+        return getattr, (m.im_class, m.im_func.func_name)
+    else:
+        return getattr, (m.im_self, m.im_func.func_name)
+
+copy_reg.pickle(types.MethodType, _pickle_method)
+
 
 
 class Sybase(Adapter):
@@ -70,12 +90,21 @@ class Sybase(Adapter):
                 )
 
         tables = self.tables(name=table_name, fmt="json")
-        docs = []
+        req = []
 
         for t in tables:
-            self.connect(test=False)
-            req = "sp_columns @table_name='%s'" % t['table_name']
-            doc = self.__runsql__(req, fmt=fmt)
-            docs.append(doc)
+            req.append((
+                "sp_columns @table_name='%s'" % (t['table_name']),
+                ))
 
-        return docs
+        p = Pool(1)
+        results = p.map(self.__run_parrallel__, req)
+
+        p.close()
+        p.join()
+
+        return results
+
+    def __run_parrallel__(self, req):
+        self.connect(test=False)
+        return self.__runsql__(req, fmt="json")
