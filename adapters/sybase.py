@@ -59,7 +59,7 @@ class Sybase(Adapter):
         return self.__runsql__(query, fmt=fmt)
 
 
-    def execut(self, query):
+    def execute(self, query):
 
         super(Sybase, self).execute(query=query)
 

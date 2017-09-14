@@ -64,14 +64,15 @@ class Adapter(object):
                 raise
 
 
-    def execut(self, query):
+    def execute(self, query):
         '''
         Execute run sql query commande whithout return
         results.
         '''
-        #self.connect(test=False)
-
-        raise NotImplementedError
+        try:
+            self.connect(test=False)
+        except:
+            pass
 
 
     def select(self, query=None, fmt=None):
