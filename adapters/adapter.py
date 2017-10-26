@@ -156,6 +156,9 @@ class Adapter(object):
         '''
         Marshall csv to dictionary
         '''
+        if fmt == "csv":
+            return output
+
         docs = []
         with io.StringIO(output) as infile:
             if fmt == "json":
