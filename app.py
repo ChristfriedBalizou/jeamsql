@@ -47,6 +47,11 @@ if __name__ == "__main__":
             dest='desc',
             help='List all tables with description in database'
             )
+    parser.add_argument('--connection',
+            default=False,
+            action='store_true',
+            help='Display connection string',
+            )
     parser.add_argument('-n', '--name',
             help=("Table name to view."+
                 "to use with -d and --list-tables options")
@@ -72,6 +77,10 @@ if __name__ == "__main__":
         sys.exit(1)
 
     db = Database(section=options.database, config_path=options.config)
+
+    if options.connection:
+        print ' '.join(db.db.connection_cmd)
+        sys.exit(0)
 
     if options.query:
         if not options.persist:
