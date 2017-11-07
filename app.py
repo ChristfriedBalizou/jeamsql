@@ -89,7 +89,11 @@ if __name__ == "__main__":
                     fmt=options.formate
                     )
         else:
-            db.execute(query=options.query)
+            try:
+                db.execute(query=options.query)
+            except:
+                # FIXME Find a better way to bypass false negative errors
+                pass
 
     if options.list_tables:
         print db.tables(
