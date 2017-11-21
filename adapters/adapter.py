@@ -129,16 +129,7 @@ class Adapter(object):
         return True
 
     def __runsql__(self, sql, fmt=None):
-
-         out, err = self.__connection__.communicate(
-                 input=b'%s\nGO' % sql
-         )
-         output = out.decode()
-
-         if self.has_error(output):
-             raise SQLError(output)
-
-         return self.to_response(output, fmt=fmt)
+        pass
 
 
     def has_error(self, output):
@@ -186,7 +177,3 @@ class Adapter(object):
             docs.append(doc)
 
         return docs
-
-
-class SQLError(Exception):
-    pass

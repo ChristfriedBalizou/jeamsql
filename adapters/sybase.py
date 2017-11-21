@@ -105,6 +105,21 @@ class Sybase(Adapter):
 
         return results
 
+    def __runsql__(self, sql, fmt=None):
+         out, err = self.__connection__.communicate(
+                 input=b'use master 1\nGO\n\n%s\nGO' % sql
+         )
+         output = out.decode('iso-8859-1').encode('utf8')
+
+         if self.has_error(output):
+             raise SQLError(output)
+
+         return self.to_response(output, fmt=fmt)
+
     def __run_parrallel__(self, req):
         self.connect(test=False)
         return self.__runsql__(req, fmt="json")
+
+
+class SQLError(Exception):
+    pass
