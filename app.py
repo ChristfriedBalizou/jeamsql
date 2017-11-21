@@ -86,7 +86,7 @@ if __name__ == "__main__":
         if not options.persist:
             print db.select(
                     query=options.query,
-                    fmt=options.formate
+                    fmt=options.format
                     )
         else:
             try:
@@ -98,11 +98,11 @@ if __name__ == "__main__":
     if options.list_tables:
         print db.tables(
                 name=options.name,
-                fmt=options.formate
+                fmt=options.format
                 )
 
     if options.desc:
         print db.description(
                 table_name=options.name,
-                fmt=options.formate
+                fmt=options.format
                 )
