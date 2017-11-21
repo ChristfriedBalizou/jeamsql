@@ -58,7 +58,7 @@ if __name__ == "__main__":
             )
 
     parser.add_argument('--format',
-            help="Output format",
+            help="Output format [csv, sql, json]",
             default=None
             )
 
