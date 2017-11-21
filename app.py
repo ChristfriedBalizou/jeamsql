@@ -57,7 +57,7 @@ if __name__ == "__main__":
                 "to use with -d and --list-tables options")
             )
 
-    parser.add_argument('--formate',
+    parser.add_argument('--format',
             help="Output format",
             default=None
             )
