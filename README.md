@@ -44,30 +44,28 @@ This make possible to display results as follow choosing a the right format(sql)
 
 ## Usage
 
-python app.py [-h] [-q QUERY] [-c CONFIG] [-d DATABASE] [-x] [--list-tables]
-              [--description] [--connection] [-n NAME] [--format FORMAT]
-
-  -h, --help                     Show this help message and exit
-
-  -q QUERY,    --query           SQL query e.g: Insert, Select...
-
-  -c CONFIG,   --config          Config file path containingdatabases properties
-
-  -d DATABASE, --database        Database section fron the confiuration file
-
-  -x,          --excetuce        Execute query with no results.Use this for Insert, Update... queries
-
-
-  --list-tables                  List all tables in database
-
-  --description                  List all tables with description in database
-
-  --connection                   Display connection string
-
-  -n NAME,     --name            Table name to view.to use with -d and --list-tables
-
-
-optional arguments:
-
-  --format FORMAT                Output format [csv, sql, json]
+    python app.py [-h] [-q QUERY] [-c CONFIG] [-d DATABASE] [-x] [--list-tables]
+                  [--description] [--connection] [-n NAME] [--format FORMAT]
+    
+      -h, --help                     Show this help message and exit
+    
+      -q QUERY,    --query           SQL query e.g: Insert, Select...
+    
+      -c CONFIG,   --config          Config file path containingdatabases properties
+    
+      -d DATABASE, --database        Database section fron the confiuration file
+    
+      -x,          --excetuce        Execute query with no results.Use this for Insert, Update... queries
+    
+      --list-tables                  List all tables in database
+    
+      --description                  List all tables with description in database
+    
+      --connection                   Display connection string
+    
+      -n NAME,     --name            Table name to view.to use with -d and --list-tables
+    
+    optional arguments:
+    
+      --format FORMAT                Output format [csv, sql, json]
 
