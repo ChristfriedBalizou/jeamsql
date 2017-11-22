@@ -107,9 +107,9 @@ class Sybase(Adapter):
 
     def __runsql__(self, sql, fmt=None):
          out, err = self.__connection__.communicate(
-                 input=b'use master 1\nGO\n\n%s\nGO' % sql
+                 input=b'%s\nGO' % sql
          )
-         output = out.decode('iso-8859-1').encode('utf8')
+         output = out.decode('iso-8859-1')
 
          if self.has_error(output):
              raise SQLError(output)
