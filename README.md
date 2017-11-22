@@ -26,7 +26,7 @@ The project structure look like:
 The **adapters** folder contains database adapters (e.i: sybase.py).
 All adapters are inherit from  **Adapter** class and implement exposed functions
 
-This project embed **Tabulate**, a clone of [Astanin/Python-Tabulate]: https://bitbucket.org/astanin/python-tabulate.git 
+This project embed **Tabulate**, a clone of [Astanin/Python-Tabulate](https://bitbucket.org/astanin/python-tabulate.git)
 This make possible to display results as follow choosing a the right format(sql):
 
     |     ID     |    COLA    |    COLB    |
