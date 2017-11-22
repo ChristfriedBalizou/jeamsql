@@ -148,7 +148,7 @@ class Adapter(object):
         Marshall csv to dictionary
         '''
         if fmt == "csv":
-            return output
+            return output.replace("\t", ",")
 
         docs = []
         with io.StringIO(output) as infile:
