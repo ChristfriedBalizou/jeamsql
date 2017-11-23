@@ -23,7 +23,7 @@ if __name__ == "__main__":
     parser.add_argument('-c', '--config',
             default=CONFIG_PATH,
             help=("Config file path containing" +
-                "databases properties")
+                " databases properties")
             )
     parser.add_argument('-d', '--database',
             help=("Database section fron the confiuration file")
@@ -33,7 +33,7 @@ if __name__ == "__main__":
             action='store_true',
             dest='persist',
             help=('Execute query with no results.' +
-                'Use this for Insert, Update... queries')
+                ' Use this for Insert, Update... queries')
             )
     parser.add_argument('--list-tables',
             default=False,
@@ -54,7 +54,7 @@ if __name__ == "__main__":
             )
     parser.add_argument('-n', '--name',
             help=("Table name to view."+
-                "to use with -d and --list-tables options")
+                " to use with -d and --list-tables")
             )
 
     parser.add_argument('--format',
