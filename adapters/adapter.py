@@ -176,4 +176,4 @@ class Adapter(object):
             doc = {key: value for key, value in row.items()}
             docs.append(doc)
 
-        return docs
+        return json.dumps(docs, indent=4)
