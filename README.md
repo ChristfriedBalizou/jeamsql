@@ -1,6 +1,6 @@
 # JEAMSQL
 
-Python low level sql client using tsql, isql... drivers.
+Python sql client using tsql, isql... drivers.
 
 Connection to database as Sybase(ASE) or Oracle require huge installation, of dependencies and pakacges.
 The aim of this project is to have a light library which offer only possibilities to write an SQL query and execute it.
